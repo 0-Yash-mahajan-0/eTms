@@ -1,11 +1,12 @@
 {
   "name": "Digital Bus Pass",
   "short_name": "Bus Pass",
-  "start_url": "./index.html",
+  "start_url": "/eTms/",
   "display": "standalone",
   "background_color": "#f2f2f2",
   "theme_color": "#6a0dad",
   "orientation": "portrait",
+  "scope": "/eTms/",
   "icons": [
     {
       "src": "tcs-removebg-preview.png",
