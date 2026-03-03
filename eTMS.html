@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Bus Pass</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f2f2f2;
+    padding-bottom:100px; /* Space for footer */
+}
+
+/* HEADER */
+.header{
+    background:#6a0dad;
+    color:#fff;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    font-size:20px;
+}
+
+.header span{
+    margin-right:15px;
+    cursor:pointer;
+}
+
+/* ROUTE CARD */
+.route-card{
+    margin:15px;
+    padding:5px;
+    border-radius:5px;
+    background:linear-gradient(140deg,#4361ee,#9517b5); 
+    color:#fff;
+    text-align:center;
+}
+
+.route-card h2{
+    font-size:16px;
+    font-weight:400;
+}
+
+.arrow-img{
+    width:50px;
+    display:block;
+    margin:8px auto;
+}
+
+.route-card .time{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+    font-size:13px;
+}
+
+/* PASS CARD */
+.pass-card{
+    background:#fff;
+    margin:15px;
+    padding:20px;
+    border-radius:0;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    position:relative;   /* ADD THIS */
+    overflow:hidden;     /* IMPORTANT */
+}
+
+.corner-img{
+    position:absolute;
+    top:0;
+    left:0;
+    width:50px;     /* adjust if needed */
+}
+
+.pass-title{
+    text-align:center;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.separator{
+    border-top:1px dashed #bbb;
+    margin-bottom:15px;
+}
+
+/* DETAILS */
+.details{
+    display:none;
+}
+
+.details-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.col{
+    width:50%;
+}
+
+.label, .value{
+    font-size:14px;
+    color:#333;
+}
+
+.value{
+    margin-top:10px;
+}
+
+/* QR */
+.qr-container{
+    text-align:center;
+}
+
+.custom-qr{
+    width:300px;
+    max-width:90%;
+    display:block;
+    margin:20px auto;
+}
+
+/* BUTTON */
+.button{
+    width:93%;
+    margin:15px auto;
+    display:block;
+    padding:12px;
+    border:none;
+    background:#6a0dad;
+    color:#fff;
+    font-weight:500;
+    cursor:pointer;
+}
+
+/* STICKY FOOTER */
+.tcs-footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    text-align:center;
+    padding:10px 0;
+    background:transparent;   /* removed white */
+    box-shadow:none;          /* removed shadow */
+}
+
+.tcs-footer img{
+    width:200px;
+    background:transparent;   /* ensure no bg */
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <span>&#9776;</span>
+    Digital Bus Pass
+</div>
+
+<!-- ROUTE CARD -->
+<div class="route-card">
+    <h2>Charholi Phata</h2>
+    <img src="arrow-removebg-preview.png" class="arrow-img">
+    <h2>SP Pune</h2>
+
+    <div class="time">
+        <span>Office In - 11:00</span>
+        <span>Office Out - 20:30</span>
+    </div>
+</div>
+
+<!-- PASS CARD -->
+<div class="pass-card">
+
+    <img src="corner.png" class="corner-img">
+
+    <div class="pass-title">Confirmed Bus Pass</div>
+    <div class="separator"></div>
+
+    <!-- QR -->
+    <div class="qr-container" id="qrSection">
+        <img src="image-removebg-preview.png" class="custom-qr">
+    </div>
+
+    <!-- DETAILS -->
+    <div class="details" id="detailsSection">
+        
+        <div class="details-row">
+            <div class="col">
+                <div class="label">Name</div>
+                <div class="value">YASH MAHAJAN</div>
+            </div>
+            <div class="col" style="text-align:right;">
+                <div class="label">Employee ID</div>
+                <div class="value">2885877</div>
+            </div>
+        </div>
+
+        <div class="details-row">
+            <div class="col">
+                <div class="label">Bus Stop Name</div>
+                <div class="value">Charholi Phata</div>
+            </div>
+            <div class="col" style="text-align:right;">
+                <div class="label">Route Type</div>
+                <div class="value">Both</div>
+            </div>
+        </div>
+
+        <div class="details-row">
+            <div class="col">
+                <div class="label">Start Date</div>
+                <div class="value">2nd Mar, 2026</div>
+            </div>
+            <div class="col" style="text-align:right;">
+                <div class="label">End Date</div>
+                <div class="value">31st Mar, 2026</div>
+            </div>
+        </div>
+
+        <div style="text-align:center; font-size:14px; margin-top:20px;">
+            Route : IN Charholi Phata Both
+        </div>
+
+    </div>
+</div>
+
+<button class="button" onclick="toggleDetails()" id="toggleBtn">
+    View Details
+</button>
+
+<!-- STICKY FOOTER -->
+<div class="tcs-footer">
+    <img src="tcs-removebg-preview.png">
+</div>
+
+<script>
+function toggleDetails(){
+    const qr = document.getElementById("qrSection");
+    const details = document.getElementById("detailsSection");
+    const btn = document.getElementById("toggleBtn");
+
+    if(details.style.display === "block"){
+        details.style.display = "none";
+        qr.style.display = "block";
+        btn.innerText = "View Details";
+    } else {
+        details.style.display = "block";
+        qr.style.display = "none";
+        btn.innerText = "View QR";
+    }
+}
+</script>
+
+</body>
+</html>
